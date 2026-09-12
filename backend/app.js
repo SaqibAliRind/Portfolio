@@ -24,6 +24,7 @@ import adminServiceRoutes from './routes/adminServiceRoutes.js';
 import adminMessageRoutes from './routes/adminMessageRoutes.js';
 import adminSettingsRoutes from './routes/adminSettingsRoutes.js';
 import adminDashboardRoutes from './routes/adminDashboardRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 
 // Initialize Express App
 const app = express();
@@ -68,6 +69,7 @@ app.use('/api/admin/services', adminServiceRoutes);
 app.use('/api/admin/messages', adminMessageRoutes);
 app.use('/api/admin/settings', adminSettingsRoutes);
 app.use('/api/admin/dashboard', adminDashboardRoutes);
+app.use('/api/admin/upload', uploadRoutes);
 
 // ── API Routes: Public Portfolio (unchanged, remain public) ───
 app.use('/api/health', healthRoutes);
