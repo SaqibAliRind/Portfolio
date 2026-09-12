@@ -1,0 +1,64 @@
+/* ============================================================
+   Responsive Breakpoint Foundation
+   ============================================================
+   Breakpoints scale:
+   - Mobile: < 480px (handled by default CSS)
+   - Tablet: >= 768px
+   - Desktop: >= 1024px
+   - Large Desktop: >= 1280px / 1440px
+   Note: Most typography scaling is already handled by 
+   clamp() in variables.css.
+   ============================================================ */
+
+/* --- Tablet (768px and up) --- */
+@media screen and (min-width: 768px) {
+  .container {
+    padding-left: var(--space-8);
+    padding-right: var(--space-8);
+  }
+
+  /* Optional: Adjust section padding for larger screens */
+  .section {
+    padding: var(--space-24) 0;
+  }
+}
+
+/* --- Desktop (1024px and up) --- */
+@media screen and (min-width: 1024px) {
+  /* Common grid layout for cards */
+  .grid-cols-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+  }
+
+  .grid-cols-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+/* --- Large Desktop (1280px and up) --- */
+@media screen and (min-width: 1280px) {
+  .container {
+    padding-left: 0; /* Relies on max-width & auto margins */
+    padding-right: 0;
+  }
+}
+
+/* --- Mobile specific adjustments (max-width: 767px) --- */
+@media screen and (max-width: 767px) {
+  /* Stack grid items on mobile */
+  .grid-cols-2,
+  .grid-cols-3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  /* Adjust large section headers for small screens */
+  .section-title {
+    font-size: var(--text-3xl);
+  }
+}

@@ -1,0 +1,278 @@
+/* ============================================================
+   Footer — Premium Cinematic Dark Theme
+   ============================================================ */
+
+.footer-section {
+  position: relative;
+  background: #06060f;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 5rem 0 2rem;
+  overflow: hidden;
+}
+
+/* Background glow */
+.footer-section::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 50%;
+  background: radial-gradient(ellipse at bottom center, rgba(249,115,22,0.08) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Container override */
+.footer-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Main Grid ── */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr;
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+
+/* Area 1: Brand */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 380px;
+}
+
+.footer-name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #f5f5f5;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.footer-name span {
+  color: #f97316;
+}
+
+.footer-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #f97316;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin: 0;
+}
+
+.footer-description {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Social icons in brand column */
+.footer-brand-socials {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.footer-social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-social-icon:hover {
+  border-color: #f97316;
+  color: #f97316;
+  background: rgba(249,115,22,0.1);
+  box-shadow: 0 0 16px rgba(249,115,22,0.3);
+  transform: translateY(-3px);
+}
+
+/* Area 2: Quick Links */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-heading {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0 0 1.5rem;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-link {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.footer-link::before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 1px;
+  background: #f97316;
+  transition: width 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #f97316;
+  transform: translateX(6px);
+}
+
+.footer-link:hover::before {
+  width: 12px;
+}
+
+/* Area 3: Contact CTA */
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.footer-cta-text {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.4);
+  margin: 0 0 1.5rem;
+  line-height: 1.6;
+}
+
+.footer-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.8rem;
+  background: linear-gradient(90deg, #ea580c, #f97316);
+  color: #fff;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(249,115,22,0.3);
+  margin-bottom: 2rem;
+}
+
+.footer-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(249,115,22,0.5);
+}
+
+/* Legacy socials (hidden since we moved to brand column) */
+.footer-socials {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-social-link:hover {
+  border-color: #f97316;
+  color: #f97316;
+  background: rgba(249,115,22,0.1);
+  transform: translateY(-3px);
+}
+
+/* ── Bottom Bar ── */
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  gap: 1rem;
+}
+
+.footer-copyright {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.3);
+  margin: 0;
+}
+
+.footer-copyright span {
+  color: #f97316;
+  font-weight: 600;
+}
+
+.footer-tech {
+  font-size: 0.8rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: rgba(255,255,255,0.2);
+  margin: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .footer-brand {
+    grid-column: span 2;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-section {
+    padding: 4rem 0 2rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .footer-brand {
+    grid-column: span 1;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+}

@@ -1,0 +1,174 @@
+/* ============================================================
+   Global CSS Reset & Base Styles
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Prevent horizontal overflow at the root — this is the main overflow guard.
+   We clip (not hide) so scroll positions are preserved but nothing leaks sideways. */
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  overflow-x: hidden; /* prevent page-level horizontal scrollbar */
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* belt-and-suspenders alongside html */
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --- Typography Defaults --- */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text);
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+}
+
+h1 { font-size: var(--text-5xl); }
+h2 { font-size: var(--text-4xl); }
+h3 { font-size: var(--text-3xl); }
+h4 { font-size: var(--text-2xl); }
+h5 { font-size: var(--text-xl); }
+h6 { font-size: var(--text-lg); }
+
+p {
+  margin-bottom: var(--space-4);
+  color: var(--color-text-secondary);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Links --- */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* --- Media --- */
+img,
+video,
+svg,
+picture {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* --- Lists --- */
+ul, ol {
+  list-style: none;
+}
+
+/* --- Forms & Buttons --- */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* --- Focus & Accessibility --- */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Prevent zoom on inputs on mobile */
+@media screen and (max-width: 768px) {
+  input, textarea, select {
+    font-size: 16px; /* prevents iOS zoom */
+  }
+}
+
+/* ============================================================
+   Scroll Reveal Animation Utilities
+   ============================================================ */
+
+/* Base state: invisible and translated down */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Base state: invisible and scaled down */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Visible state */
+.reveal-visible {
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+}
+
+/* Stagger delays for lists/grids */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up, .reveal-scale {
+    transition: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}

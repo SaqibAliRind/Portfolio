@@ -1,0 +1,474 @@
+/* ============================================================
+   Admin Login — 3-Column Layout matching reference image exactly
+   Prefix: al- (admin login)
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ── Page Shell ── */
+.al-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #050510;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', system-ui, sans-serif;
+  padding: 2rem 1rem;
+}
+
+/* Background with dark blue/purple cinematic gradient */
+.al-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 10% 50%, rgba(249,115,22,0.15) 0%, transparent 40%),
+    radial-gradient(ellipse at 90% 80%, rgba(249,115,22,0.10) 0%, transparent 35%),
+    radial-gradient(ellipse at 70% 10%, rgba(59,130,246,0.12) 0%, transparent 40%),
+    radial-gradient(ellipse at 30% 90%, rgba(139,92,246,0.08) 0%, transparent 40%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.al-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(249,115,22,0.03) 1px, transparent 1px);
+  background-size: 55px 55px;
+}
+
+/* ── Outer Wrapper: 3 columns ── */
+.al-wrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 0.75fr;
+  gap: 3rem;
+  align-items: center;
+  background: rgba(8, 8, 24, 0.75);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 28px;
+  padding: 3.5rem;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  box-shadow:
+    0 40px 100px rgba(0,0,0,0.8),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+/* ═══════ LEFT COLUMN ═══════ */
+.al-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  position: relative;
+}
+
+/* Logo Row */
+.al-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.al-logo-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  background: linear-gradient(135deg, #ea580c, #f97316);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 24px rgba(249,115,22,0.5);
+}
+
+.al-logo-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #f5f5f5;
+  line-height: 1.2;
+}
+
+.al-logo-name span {
+  color: #f97316;
+}
+
+.al-logo-role {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* Welcome block */
+.al-welcome {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.al-welcome-title {
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 800;
+  color: #f5f5f5;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.al-welcome-sub {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.42);
+  margin: 0;
+}
+
+/* Quote */
+.al-quote {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.28);
+  margin: 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ═══════ CENTER: Form Card ═══════ */
+.al-center {
+  display: flex;
+  flex-direction: column;
+}
+
+.al-form-card {
+  background: rgba(12, 12, 28, 0.6);
+  border: 1px solid rgba(59,130,246,0.25);
+  border-radius: 20px;
+  padding: 2.5rem;
+  position: relative;
+  overflow: visible;
+}
+
+/* Form title row */
+.al-form-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.8rem;
+  position: relative;
+}
+
+.al-form-heading {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #f5f5f5;
+  margin: 0 0 0.3rem;
+}
+
+.al-form-sub {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.35);
+  margin: 0;
+}
+
+.al-dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #f97316;
+  box-shadow: 0 0 14px rgba(249,115,22,0.9);
+  flex-shrink: 0;
+  margin-top: 8px;
+  animation: al-pulse 2s ease-in-out infinite;
+}
+
+@keyframes al-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.6; }
+}
+
+/* Alert */
+.al-alert {
+  padding: 0.85rem 1.1rem;
+  border-radius: 10px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+
+.al-err { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.3); color: #f87171; }
+.al-ok  { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3); color: #34d399; }
+
+/* Fields */
+.al-field {
+  margin-bottom: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.al-field label {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+}
+
+.al-inp-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.al-ico {
+  position: absolute;
+  left: 14px;
+  color: rgba(255,255,255,0.3);
+  pointer-events: none;
+  display: block;
+  flex-shrink: 0;
+}
+
+.al-inp-wrap input {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 10px;
+  padding: 0.88rem 2.6rem 0.88rem 2.6rem;
+  color: #f5f5f5;
+  font-size: 0.94rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.al-inp-wrap input::placeholder { color: rgba(255,255,255,0.2); }
+
+.al-inp-wrap input:focus {
+  border-color: rgba(59,130,246,0.55);
+  box-shadow: 0 0 18px rgba(59,130,246,0.13);
+  background: rgba(255,255,255,0.05);
+}
+
+.al-otp-inp {
+  text-align: center !important;
+  letter-spacing: 0.4em !important;
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+}
+
+/* Eye toggle */
+.al-eye {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255,255,255,0.28);
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  transition: color 0.2s;
+}
+.al-eye:hover { color: rgba(255,255,255,0.6); }
+
+/* Options row */
+.al-opts {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.4rem;
+}
+
+.al-chk {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.83rem;
+  color: rgba(255,255,255,0.45);
+  cursor: pointer;
+  user-select: none;
+}
+
+.al-chk input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  background: rgba(255,255,255,0.03);
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.al-chk input:checked {
+  background: #f97316;
+  border-color: #f97316;
+}
+
+.al-chk input:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px; top: 1px;
+  width: 5px; height: 9px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+.al-forgot { font-size: 0.83rem; color: #f97316; text-decoration: none; }
+.al-forgot:hover { opacity: 0.75; }
+
+/* Submit */
+.al-submit {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(90deg, #ea580c 0%, #f97316 60%, #fb923c 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(249,115,22,0.4);
+  font-family: inherit;
+  letter-spacing: 0.02em;
+}
+.al-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(249,115,22,0.6); }
+.al-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+/* OTP extras */
+.al-otp-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.1rem;
+  font-size: 0.84rem;
+}
+.al-timer { color: rgba(255,255,255,0.5); font-weight: 600; }
+.al-timer-warn { color: #f87171; }
+.al-resend { background: none; border: none; color: #f97316; font-size: 0.84rem; font-weight: 600; cursor: pointer; font-family: inherit; }
+.al-resend:disabled { color: rgba(255,255,255,0.25); cursor: not-allowed; }
+.al-back {
+  width: 100%; margin-top: 0.7rem; padding: 0.85rem;
+  background: transparent; border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px; color: rgba(255,255,255,0.45);
+  font-size: 0.9rem; font-weight: 600; cursor: pointer; font-family: inherit;
+  transition: all 0.2s;
+}
+.al-back:hover:not(:disabled) { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); }
+
+/* Footer note */
+.al-footer-note {
+  margin-top: 1.3rem;
+  text-align: center;
+}
+.al-footer-note p { font-size: 0.83rem; color: rgba(255,255,255,0.3); margin: 0; }
+.al-footer-note a { color: #f97316; text-decoration: none; font-weight: 600; }
+.al-footer-note a:hover { opacity: 0.8; }
+
+/* ═══════ RIGHT: 3D Padlock ═══════ */
+.al-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.al-lock-scene {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lock-float 7s ease-in-out infinite;
+}
+
+@keyframes lock-float {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-18px) rotate(3deg); }
+}
+
+/* Spinning rings */
+.al-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: #f97316;
+  border-right-color: rgba(249,115,22,0.3);
+}
+
+.al-ring-1 {
+  width: 170px;
+  height: 170px;
+  border-top-color: #f97316;
+  border-left-color: rgba(249,115,22,0.3);
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  animation: ring-spin1 6s linear infinite;
+  box-shadow: 0 0 20px rgba(249,115,22,0.2);
+}
+
+.al-ring-2 {
+  width: 130px;
+  height: 130px;
+  border-top-color: #3b82f6;
+  border-right-color: rgba(59,130,246,0.3);
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  animation: ring-spin2 4s linear infinite;
+  box-shadow: 0 0 15px rgba(59,130,246,0.2);
+}
+
+@keyframes ring-spin1 { to { transform: rotate(360deg); } }
+@keyframes ring-spin2 { to { transform: rotate(-360deg); } }
+
+/* Lock body center */
+.al-lock-body {
+  position: relative;
+  z-index: 2;
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(145deg, #1a1030, #0d0a20);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(249,115,22,0.4);
+  box-shadow:
+    0 0 30px rgba(249,115,22,0.3),
+    0 0 60px rgba(249,115,22,0.1),
+    inset 0 0 20px rgba(249,115,22,0.05);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .al-wrapper {
+    grid-template-columns: 1fr 1.1fr;
+    grid-template-rows: auto auto;
+  }
+  .al-right { display: none; }
+}
+
+@media (max-width: 640px) {
+  .al-wrapper {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.5rem;
+  }
+  .al-left {
+    gap: 1.5rem;
+  }
+  .al-welcome { display: none; }
+}

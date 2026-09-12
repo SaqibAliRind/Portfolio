@@ -1,0 +1,83 @@
+/* ============================================================
+   Utility Classes
+   ============================================================ */
+
+/* --- Container System --- */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-6);
+  padding-right: var(--space-6);
+}
+
+/* --- Layout Utilities --- */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-2 { gap: var(--space-2); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+
+.hidden {
+  display: none !important;
+}
+
+/* --- Text Utilities --- */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-primary { color: var(--color-primary); }
+.text-muted { color: var(--color-text-muted); }
+
+/* --- Accessibility Utilities --- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Make it visible when focused (for skip links) */
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}

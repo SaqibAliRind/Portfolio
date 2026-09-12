@@ -1,0 +1,210 @@
+/* ============================================================
+   Education Section — Cinematic Left-Aligned Timeline
+   ============================================================ */
+
+.education-section {
+  position: relative;
+  padding: clamp(5rem, 8vw, 8rem) 0;
+  background-color: var(--color-bg);
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.02);
+}
+
+.edu-bg-glow {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vh;
+  background: radial-gradient(ellipse at center, rgba(234, 179, 8, 0.08) 0%, transparent 60%);
+  filter: blur(100px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.edu-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edu-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-primary);
+  margin-bottom: 0.8rem;
+}
+
+.edu-eyebrow-line {
+  display: block;
+  width: 30px;
+  height: 2px;
+  background: var(--color-primary);
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--color-primary);
+}
+
+.edu-title {
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+/* ── Timeline ────────────────────────────────────────────── */
+.edu-timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0 2rem 40px;
+}
+
+/* Vertical Line */
+.edu-timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 15px;
+  width: 2px;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(255,255,255,0.1) 10%, 
+    rgba(255,255,255,0.1) 90%, 
+    transparent 100%);
+}
+
+.edu-item {
+  position: relative;
+  margin-bottom: 3rem;
+  animation: fade-right 0.6s ease forwards;
+  animation-delay: var(--item-delay);
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.edu-item:last-child {
+  margin-bottom: 0;
+}
+
+@keyframes fade-right {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Timeline Dot */
+.edu-dot {
+  position: absolute;
+  left: -40px;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  background: var(--color-bg);
+  border: 2px solid var(--edu-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 0 10px rgba(0,0,0,0.8), 0 0 15px var(--edu-color);
+  transition: all 0.3s ease;
+}
+
+.edu-icon {
+  font-size: 0.9rem;
+  text-shadow: 0 0 8px var(--edu-color);
+}
+
+.edu-item:hover .edu-dot {
+  transform: scale(1.2);
+  background: var(--edu-color);
+}
+
+/* Card */
+.edu-card {
+  background: rgba(15, 15, 25, 0.6);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.edu-item:hover .edu-card {
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(20, 20, 35, 0.8);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4), inset 5px 0 0 var(--edu-color);
+  transform: translateX(5px);
+}
+
+.edu-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.edu-degree {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: 0.3rem;
+}
+
+.edu-school {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--edu-color);
+}
+
+.edu-date {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  background: rgba(255,255,255,0.05);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.edu-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .edu-timeline {
+    padding-left: 30px;
+  }
+  
+  .edu-timeline-line {
+    left: 8px;
+  }
+  
+  .edu-dot {
+    left: -22px;
+    width: 28px;
+    height: 28px;
+  }
+  
+  .edu-card-header {
+    flex-direction: column;
+  }
+  
+  .edu-date {
+    align-self: flex-start;
+  }
+}
