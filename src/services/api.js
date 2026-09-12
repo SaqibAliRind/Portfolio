@@ -9,8 +9,9 @@ import axios from 'axios';
  * Do NOT hard-code a production URL here.
  * Set VITE_API_BASE_URL in your .env file (see .env.example).
  */
+const isProd = import.meta.env.PROD;
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL || (isProd ? '/api' : 'http://localhost:5000/api'),
   headers: {
     'Content-Type': 'application/json',
   },
