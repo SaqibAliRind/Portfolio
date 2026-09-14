@@ -38,13 +38,19 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (e.g., mobile apps, curl, Postman)
+    // Allow requests with no origin (e.g., mobile apps, curl, Postman, same-origin)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error(`CORS blocked: ${origin} is not allowed.`));
-    }
+    
+    // Allow localhost for dev
+    if (origin.startsWith('http://localhost:')) return callback(null, true);
+    
+    // Allow all vercel preview/production deployments
+    if (origin.endsWith('.vercel.app')) return callback(null, true);
+    
+    // Allow explicit CLIENT_URL from env if set
+    if (process.env.CLIENT_URL && origin === process.env.CLIENT_URL) return callback(null, true);
+
+    callback(new Error(`CORS blocked: ${origin} is not allowed.`));
   },
   credentials: true,
 }));
