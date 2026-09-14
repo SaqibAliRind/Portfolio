@@ -1,34 +1,23 @@
 import axios from 'axios';
+import { getAdminToken, removeAdminToken } from '../utils/authStorage';
 
 /**
- * Axios API Instance — Foundation
+ * Axios API Instance
  *
- * In PRODUCTION (Vercel): Always use relative '/api' so requests go to
- * the same domain's serverless functions — no CORS, no localhost issues.
+ * Always uses relative '/api' path.
+ * - Production (Vercel): routes to serverless function at same domain.
+ * - Development: Vite proxy forwards '/api' → 'http://localhost:5000/api'.
+ *   (See vite.config.js server.proxy)
  *
- * In DEVELOPMENT: Use VITE_API_BASE_URL env var, or fall back to localhost.
+ * This avoids any dependency on environment variables being correctly set.
  */
-const getBaseURL = () => {
-  // Production: always use relative path (Vercel serverless)
-  if (import.meta.env.PROD) return '/api';
-  // Development: use .env override or localhost default
-  return import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
-};
-
 const api = axios.create({
-  baseURL: getBaseURL(),
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  timeout: 15000, // 15 seconds
+  baseURL: '/api',
+  headers: { 'Content-Type': 'application/json' },
+  timeout: 15000,
 });
 
-import { getAdminToken } from '../utils/authStorage';
-
-/**
- * Request interceptor
- * Attach the JWT token from localStorage (when available) to every request.
- */
+// Attach JWT token to every request
 api.interceptors.request.use(
   (config) => {
     const token = getAdminToken();
@@ -40,27 +29,16 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-import { removeAdminToken } from '../utils/authStorage';
-
-/**
- * Response interceptor
- * Centralised error handling — extend as needed in future tasks.
- */
+// Global response error handler
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Always log errors to help debug
     console.error('[API Error]', error?.response?.data || error.message);
 
-    // Handle 401 Unauthorized globally
-    if (error.response && error.response.status === 401) {
-      // Prevent redirecting if the 401 was actually from the login endpoint itself
-      const isLoginRequest = error.config.url === '/auth/login';
-      
+    if (error.response?.status === 401) {
+      const isLoginRequest = error.config?.url?.includes('/auth/login');
       if (!isLoginRequest) {
         removeAdminToken();
-        // Redirect to login (avoiding circular dependency with Redux store)
-        // Only redirect if not already there
         if (window.location.pathname !== '/admin/login') {
           window.location.href = '/admin/login';
         }

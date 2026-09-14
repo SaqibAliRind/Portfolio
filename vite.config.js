@@ -9,6 +9,16 @@ export default defineConfig({
       '@': '/src',
     },
   },
+  server: {
+    // Proxy /api requests to backend in development
+    // So 'baseURL: /api' works locally without changing env vars
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+      },
+    },
+  },
   build: {
     rollupOptions: {
       output: {
@@ -17,10 +27,9 @@ export default defineConfig({
           'r3f-vendor': ['@react-three/fiber', '@react-three/drei'],
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           'redux-vendor': ['@reduxjs/toolkit', 'react-redux'],
-        }
-      }
+        },
+      },
     },
     chunkSizeWarningLimit: 600,
   },
 });
-
