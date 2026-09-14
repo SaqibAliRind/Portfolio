@@ -3,19 +3,24 @@ import axios from 'axios';
 /**
  * Axios API Instance — Foundation
  *
- * Base URL is read from the VITE_API_BASE_URL environment variable.
- * Falls back to the local development server when the variable is absent.
+ * In PRODUCTION (Vercel): Always use relative '/api' so requests go to
+ * the same domain's serverless functions — no CORS, no localhost issues.
  *
- * Do NOT hard-code a production URL here.
- * Set VITE_API_BASE_URL in your .env file (see .env.example).
+ * In DEVELOPMENT: Use VITE_API_BASE_URL env var, or fall back to localhost.
  */
-const isProd = import.meta.env.PROD;
+const getBaseURL = () => {
+  // Production: always use relative path (Vercel serverless)
+  if (import.meta.env.PROD) return '/api';
+  // Development: use .env override or localhost default
+  return import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+};
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || (isProd ? '/api' : 'http://localhost:5000/api'),
+  baseURL: getBaseURL(),
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000, // 10 seconds
+  timeout: 15000, // 15 seconds
 });
 
 import { getAdminToken } from '../utils/authStorage';
@@ -44,10 +49,8 @@ import { removeAdminToken } from '../utils/authStorage';
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Log to console only during development
-    if (import.meta.env.DEV) {
-      console.error('[API Error]', error?.response?.data || error.message);
-    }
+    // Always log errors to help debug
+    console.error('[API Error]', error?.response?.data || error.message);
 
     // Handle 401 Unauthorized globally
     if (error.response && error.response.status === 401) {
