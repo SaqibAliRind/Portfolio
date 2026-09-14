@@ -26,8 +26,8 @@ export const contactInfo = [
     id: 'github',
     type: 'social',
     label: 'GitHub',
-    value: 'github.com/saqibrind',
-    href: 'https://github.com/',
+    value: 'github.com/saqib123s',
+    href: 'https://github.com/saqib123s',
     icon: 'github'
   },
   {
