@@ -40,8 +40,8 @@ export const demoProjects = [
       "Developed the complete frontend and backend. Implemented authentication, database integration, payment gateway and admin panel.",
     duration: "4 Weeks",
     status: "Full Stack Project",
-    liveDemo: "#",
-    github: "#",
+    liveDemo: "https://client-hotelmanagementsystem-74.vercel.app",
+    github: "https://github.com/SaqibAliRind/HotelManagementSystem.git",
     featured: true,
   },
   {
