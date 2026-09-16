@@ -63,7 +63,11 @@ const About = () => {
               Hi, I'm <span className="about-name-highlight">{firstName} {lastName}</span>
             </h2>
 
-            <p className="about-bio">{bio}</p>
+            <div className="about-bio">
+              {bio.split('\n').map((paragraph, index) => (
+                paragraph.trim() ? <p key={index}>{paragraph}</p> : null
+              ))}
+            </div>
 
             {/* Stats row */}
             <div className="about-stats">
@@ -107,19 +111,6 @@ const About = () => {
                     className="about-temp-image"
                   />
                 )}
-              </div>
-
-              {/* Floating text overlay */}
-              <div className="photo-overlay-text" aria-hidden="true">
-                <span>Better</span>
-                <span>Code</span>
-                <span>Bigger</span>
-                <span>Dreams</span>
-              </div>
-
-              {/* Signature */}
-              <div className="photo-signature" aria-hidden="true">
-                Saqib Rind
               </div>
             </div>
 

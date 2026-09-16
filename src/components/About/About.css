@@ -81,12 +81,19 @@
   filter: drop-shadow(0 0 20px rgba(249,115,22,0.4));
 }
 
-/* Bio */
 .about-bio {
   font-size: clamp(0.85rem, 1.1vw, 0.95rem);
   line-height: 1.8;
   color: var(--color-text-muted);
   margin: 0;
+}
+
+.about-bio p {
+  margin-bottom: 0.8rem;
+}
+
+.about-bio p:last-child {
+  margin-bottom: 0;
 }
 
 /* ── Stats ────────────────────────────────────────────────── */
@@ -188,6 +195,7 @@
    ============================================================ */
 .about-photo-col {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
