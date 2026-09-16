@@ -27,10 +27,10 @@ const Hero = () => {
   const technologies = profile?.skills?.slice(0, 5) || ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JavaScript'];
   const name        = profile?.name     || 'Saqib Ali Rind';
   const title       = profile?.title    || 'MERN Stack Developer';
-  const bio         = profile?.bio      || 'I build modern, scalable, and high-performance full-stack web applications. Passionate about crafting clean user experiences and robust backend systems.';
-  const githubLink  = profile?.socialLinks?.github   || '#';
-  const linkedinLink= profile?.socialLinks?.linkedin || '#';
-  const resumeLink  = profile?.resumeUrl || '/resume.pdf';
+  const bio         = profile?.shortBio || profile?.bio || 'I build modern, scalable, and high-performance full-stack web applications.';
+  const githubLink  = profile?.githubUrl   || '#';
+  const linkedinLink= profile?.linkedinUrl || '#';
+  const resumeLink  = profile?.resumeUrl   || '#';
 
   // Split name for highlight effect (last word in orange like reference)
   const nameParts = name.trim().split(' ');
