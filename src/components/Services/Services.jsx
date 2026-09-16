@@ -88,11 +88,14 @@ const getIcon = (iconName) => {
 };
 
 /* ── Service Card ──────────────────────────────────────────── */
-const ServiceCard = ({ service, delayClass }) => {
-  const { title, shortDescription, description, technologies = [], features = [], icon, available } = service;
+const ServiceCard = ({ service, index }) => {
+  const cardRef = useScrollReveal();
+  const { title, shortDescription, technologies = [], features = [], icon, available } = service;
+  const delays = ['delay-100', 'delay-200', 'delay-300'];
+  const delayClass = delays[index % 3] || '';
 
   return (
-    <article className={`service-card reveal-up ${delayClass || ''}`}>
+    <article ref={cardRef} className={`service-card reveal-up ${delayClass}`}>
       <div className="service-card-header">
         <div className="service-icon-wrapper" aria-hidden="true">
           {getIcon(icon)}
@@ -152,7 +155,6 @@ const Services = () => {
   const { data: services, loading, error, fetched } = useSelector((state) => state.portfolio.services);
 
   const headerRef = useScrollReveal();
-  const gridRef = useScrollReveal();
 
   useEffect(() => {
     if (!fetched) {
@@ -207,12 +209,12 @@ const Services = () => {
           </p>
         </div>
 
-        <div ref={gridRef} className="services-grid">
+        <div className="services-grid">
           {services.map((service, index) => (
-            <ServiceCard 
-              key={service._id} 
-              service={service} 
-              delayClass={`delay-${(index % 3) + 1}`}
+            <ServiceCard
+              key={service._id}
+              service={service}
+              index={index}
             />
           ))}
         </div>
