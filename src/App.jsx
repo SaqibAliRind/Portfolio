@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Analytics } from '@vercel/analytics/react';
 
 import { fetchCurrentAdmin, setInitialized } from './store/slices/authSlice';
 import { getAdminToken } from './utils/authStorage';
@@ -41,6 +42,7 @@ import AdminSettings from './pages/admin/AdminSettings';
 function App() {
   const dispatch = useDispatch();
   const { initialized } = useSelector((state) => state.auth);
+  const { data: profile } = useSelector((state) => state.portfolio.profile);
 
   useEffect(() => {
     const initAuth = async () => {
@@ -58,6 +60,13 @@ function App() {
       initAuth();
     }
   }, [dispatch, initialized]);
+
+  // Dynamically update page title based on backend profile data
+  useEffect(() => {
+    if (profile && profile.name) {
+      document.title = `${profile.name} | Portfolio`;
+    }
+  }, [profile]);
 
   return (
     <BrowserRouter>
@@ -91,6 +100,7 @@ function App() {
         {/* 404 Catch-all */}
         <Route path="*" element={<><Navbar /><main><NotFound /></main></>} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   );
 }

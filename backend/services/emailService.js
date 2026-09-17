@@ -95,3 +95,76 @@ export const sendOTPEmail = async (toEmail, otp) => {
 
   await transporter.sendMail(mailOptions);
 };
+
+/**
+ * Send notification email to admin when a new contact message is submitted
+ * @param {Object} messageData - The message details
+ */
+export const sendContactNotificationEmail = async (messageData) => {
+  const transporter = createTransporter();
+  const { name, email, subject, message, projectType } = messageData;
+  const adminEmail = process.env.GMAIL_USER; // Send to self
+
+  const mailOptions = {
+    from: `"Portfolio Contact Form" <${process.env.GMAIL_USER}>`,
+    to: adminEmail,
+    replyTo: email,
+    subject: `New Message: ${subject}`,
+    html: `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <style>
+          body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f4f5; margin: 0; padding: 40px 20px; }
+          .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+          .header { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); padding: 24px; color: white; text-align: center; }
+          .header h1 { margin: 0; font-size: 20px; font-weight: 600; }
+          .content { padding: 32px; color: #3f3f46; }
+          .field { margin-bottom: 20px; }
+          .label { font-size: 12px; font-weight: 700; color: #a1a1aa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+          .value { font-size: 15px; color: #27272a; background: #f4f4f5; padding: 12px 16px; border-radius: 8px; border: 1px solid #e4e4e7; }
+          .message-box { font-size: 15px; color: #27272a; background: #f4f4f5; padding: 16px; border-radius: 8px; border: 1px solid #e4e4e7; white-space: pre-wrap; line-height: 1.6; }
+          .footer { text-align: center; padding: 20px; color: #a1a1aa; font-size: 12px; border-top: 1px solid #f4f4f5; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>📬 New Contact Message Received</h1>
+          </div>
+          <div class="content">
+            <div class="field">
+              <div class="label">Sender Name</div>
+              <div class="value">${name}</div>
+            </div>
+            <div class="field">
+              <div class="label">Email Address</div>
+              <div class="value"><a href="mailto:${email}" style="color: #ea580c; text-decoration: none;">${email}</a></div>
+            </div>
+            <div class="field">
+              <div class="label">Subject</div>
+              <div class="value">${subject}</div>
+            </div>
+            ${projectType ? `
+            <div class="field">
+              <div class="label">Project Type</div>
+              <div class="value">${projectType}</div>
+            </div>
+            ` : ''}
+            <div class="field">
+              <div class="label">Message</div>
+              <div class="message-box">${message}</div>
+            </div>
+          </div>
+          <div class="footer">
+            You can reply directly to this email to reach ${name}.
+          </div>
+        </div>
+      </body>
+      </html>
+    `,
+  };
+
+  await transporter.sendMail(mailOptions);
+};

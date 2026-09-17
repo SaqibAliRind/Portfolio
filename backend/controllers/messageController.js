@@ -1,5 +1,6 @@
 import Message from '../models/Message.js';
 import Settings from '../models/Settings.js';
+import { sendContactNotificationEmail } from '../services/emailService.js';
 
 /**
  * @desc    Submit a new contact message
@@ -41,6 +42,16 @@ export const createMessage = async (req, res, next) => {
 
     // 4. Save to MongoDB
     const createdMessage = await Message.create(newMessageData);
+
+    // 4.5 Send email notification to Admin
+    try {
+      if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
+        await sendContactNotificationEmail(createdMessage);
+      }
+    } catch (emailError) {
+      console.error('Failed to send contact notification email:', emailError);
+      // We don't fail the request if email fails, message is already saved in DB
+    }
 
     // 5. Return success response (avoiding exposing full document unnecessarily)
     res.status(201).json({
